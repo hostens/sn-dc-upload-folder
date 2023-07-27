@@ -1,0 +1,68 @@
+name: "Upload folder"
+description: "Upload folder content to Devops Config"
+inputs:
+  sn_instance:
+    description: "ServiceNow instance"
+    required: true
+  sn_user:
+    description: "ServiceNow username"
+    required: true
+  sn_password:
+    description: "ServiceNow password"
+    required: true
+  application:
+    description: "Devops Config application"
+    required: true
+  target:
+    description: "Devops Config object against which to upload (component|collection|deployable)"
+    required: true
+  target_name:
+    description: "Name of the collection or deployable against which to upload"
+    required: false
+  folder_path:
+    description: "Folder from where to upload files"
+    required: true
+  recursive:
+    description: "Traverse folder recursively (true|false)"
+    required: true
+    default: false
+  data_format:
+    description: "File format to upload"
+    required: true
+  auto_commit:
+    description: "Commit changeset (true|false)"
+    required: true
+    default: true
+  auto_validate:
+    description: "Validate after upload (true|false)"
+    required: true
+    default: true
+  publish_option:
+    description: "Publish after successful validation (publish_none|publish_valid)"
+    required: true
+    default: "publish_valid"
+  name_path:
+    description: "Path against which to upload in Devops Config Data Model"
+    required: false
+outputs:
+  changeset:
+    description: "Changeset used for this upload"
+  validation:
+    description: "Validation status for the upload"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.sn_instance }}
+    - ${{ inputs.sn_user }}
+    - ${{ inputs.sn_password }}
+    - ${{ inputs.application }}
+    - ${{ inputs.target }}
+    - ${{ inputs.target_name }}
+    - ${{ inputs.folder_path }}
+    - ${{ inputs.recursive }}
+    - ${{ inputs.data_format }}
+    - ${{ inputs.auto_commit }}
+    - ${{ inputs.auto_validate }}
+    - ${{ inputs.publish_option }}
+    - ${{ inputs.name_path }}
