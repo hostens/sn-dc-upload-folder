@@ -5,10 +5,10 @@ inputs:
     description: "ServiceNow instance"
     required: true
   devops-integration-user-name:
-    description: "Devops Integration username"
+    description: "ServiceNow username"
     required: true
   devops-integration-user-password:
-    description: "Devops Integration user password"
+    description: "ServiceNow password"
     required: true
   application:
     description: "Devops Config application"
@@ -16,32 +16,32 @@ inputs:
   target:
     description: "Devops Config object against which to upload (component|collection|deployable)"
     required: true
-  target_name:
+  target-name:
     description: "Name of the collection or deployable against which to upload"
     required: false
-  folder_path:
+  folder-path:
     description: "Folder from where to upload files"
     required: true
   recursive:
     description: "Traverse folder recursively (true|false)"
     required: true
     default: false
-  data_format:
+  data-format:
     description: "File format to upload"
     required: true
-  auto_commit:
+  auto-commit:
     description: "Commit changeset (true|false)"
     required: true
     default: true
-  auto_validate:
+  auto-validate:
     description: "Validate after upload (true|false)"
     required: true
     default: true
-  publish_option:
+  publish-option:
     description: "Publish after successful validation (publish_none|publish_valid)"
     required: true
     default: "publish_valid"
-  name_path:
+  name-path:
     description: "Path against which to upload in Devops Config Data Model"
     required: false
 outputs:
@@ -58,11 +58,11 @@ runs:
     - ${{ inputs.devops-integration-user-password }}
     - ${{ inputs.application }}
     - ${{ inputs.target }}
-    - ${{ inputs.target_name }}
-    - ${{ inputs.folder_path }}
+    - ${{ inputs.target-name }}
+    - ${{ inputs.folder-path }}
     - ${{ inputs.recursive }}
-    - ${{ inputs.data_format }}
-    - ${{ inputs.auto_commit }}
-    - ${{ inputs.auto_validate }}
-    - ${{ inputs.publish_option }}
-    - ${{ inputs.name_path }}
+    - ${{ inputs.data-format }}
+    - ${{ inputs.auto-commit }}
+    - ${{ inputs.auto-validate }}
+    - ${{ inputs.publish-option }}
+    - ${{ inputs.name-path }}
