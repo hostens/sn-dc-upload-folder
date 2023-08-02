@@ -1,14 +1,14 @@
 name: "Upload folder"
 description: "Upload folder content to Devops Config"
 inputs:
-  sn_instance:
+  instance-url:
     description: "ServiceNow instance"
     required: true
-  sn_user:
-    description: "ServiceNow username"
+  devops-integration-user-name:
+    description: "Devops Integration username"
     required: true
-  sn_password:
-    description: "ServiceNow password"
+  devops-integration-user-password:
+    description: "Devops Integration user password"
     required: true
   application:
     description: "Devops Config application"
@@ -53,9 +53,9 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.sn_instance }}
-    - ${{ inputs.sn_user }}
-    - ${{ inputs.sn_password }}
+    - ${{ inputs.instance-url }}
+    - ${{ inputs.devops-integration-user-name }}
+    - ${{ inputs.devops-integration-user-password }}
     - ${{ inputs.application }}
     - ${{ inputs.target }}
     - ${{ inputs.target_name }}
