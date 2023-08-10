@@ -9,6 +9,11 @@ function create_changeset()
   fi
 
   response=$(curl -s -X POST ${request_url} -u ${sn_user}:${sn_password})
+  
+  if [[ $(echo ${response}| jq -r ".error") != "null" ]]; then
+    echo ${response}|jq -r ".error.message"
+    return 1
+  fi
 
   changeset_id=$(echo ${response}|jq -r ".result.number")
   echo "changeset=${changeset_id}" >> $GITHUB_OUTPUT
@@ -154,6 +159,12 @@ else
 fi
 
 changeset=$(create_changeset $4)
+if [[ $? -eq 1 ]]; then
+  echo "An error occurred during changeset creation:"
+  echo ${changeset}
+  echo "Aborting..."
+  exit 1
+fi
 
 for file in ${files[@]}; do
   echo ${file}
