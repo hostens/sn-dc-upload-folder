@@ -58,7 +58,7 @@ function get_snapshot_validation_status()
     response=$(curl -s -X GET ${request_url} -u ${sn_user}:${sn_password})
     for row in $(echo ${response}|jq -r ".result[]| @base64"); do
       _jq() {
-        echo ${row}| base64 --decode | jq -r ${1}
+        echo ${row}| base64 -d | jq -r ${1}
       }
       validation_status=$(_jq ".validation")
       snapshot=$(_jq ".name")
@@ -168,7 +168,7 @@ fi
 
 for file in ${files[@]}; do
   echo ${file}
-  file_path=$(echo ${file}|sed -r 's/^\.\///'|sed -r 's/\//,/g')
+  file_path=$(echo ${file}|sed -r 's/^\.\///'|sed -r 's/\//%2F/g')
   name_path="${13},${file_path}"
   upload $5 $6 $4 $9 ${12} ${file} ${changeset} ${name_path}
 done
