@@ -27,7 +27,7 @@ inputs:
     required: true
     default: false
   data-format:
-    description: "File format to upload"
+    description: "File format to upload (json|yaml|properties|ini|xml)"
     required: true
   auto-commit:
     description: "Commit changeset (true|false)"
